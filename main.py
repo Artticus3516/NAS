@@ -4,6 +4,32 @@ import re
 import time
 
 PROJECT_ROOT = './Root_dir'
+Host = '127.0.0.1'
+PORT = 4444
+def start_server():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        try:
+
+            s.bind((Host, PORT))
+            throw_error("Server Binded")
+
+        except socket.error as msg:
+            throw_error(str(msg))
+            return 1
+        s.listen()
+        throw_error("Server Listening")
+
+        con,addr=s.accept()
+        with con:
+            throw_error("Server Connected with {} {}".format(con,addr))
+            while True:
+                data = client.recv(4096)
+                print(data.decode())
+                if not data:break
+                sdata = ("Hi we are the server ".encode())
+                data = client.recv(4096)
+                print(data.decode())
 
 
 def initialise_user(userr,password,email,limit):
@@ -37,3 +63,4 @@ class user:
 
 
 initialise_user("Artticus","Niggarmaarda","artticus9@gmail.com",50)
+start_server()
