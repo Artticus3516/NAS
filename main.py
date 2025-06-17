@@ -3,14 +3,21 @@ import os
 import re
 import time
 
+PROJECT_ROOT = './Root_dir'
+
+
+def initialise_user(userr,password,email,limit):
+    userr = user(userr,password,email,limit)
+    print("User created Successfully")
+    return user
 def throw_error(text):
     print('-'*len(text))
     print(text)
     print('-'*len(text))
-def gen_statements(text,obns):
-    print('-'*len(text))
-    print(text,'for user: {}'.format([obns.user]))
-    print('-'*len(text))
+
+
+
+
 class user:
     def __init__(self,username,password,email,limit):
         if re.fullmatch(r'^[A-Za-z0-9_]@[A-Za-z0-9]+\.(com|org|edu)$',email) :
@@ -20,9 +27,13 @@ class user:
         self.password = password
         self.email = email
         self.allocation = limit
-        gen_statements("User created",self)
-    def allot_space(self,allocation):
-        os.mkdir('./Root_dir_{}'.format(self.user))
+        print(f"{user} has been created with {[username,password,email,limit]}")
+        current_user_dir = os.path.join(PROJECT_ROOT, 'Users_Data', 'Root_dir-{}'.format(self.user))
+        os.makedirs(current_user_dir,exist_ok=True)
 
 
-new_user = user("Artticus","Niggarmaarda","artticus9@gmail.com",50)
+
+
+
+
+initialise_user("Artticus","Niggarmaarda","artticus9@gmail.com",50)
