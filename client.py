@@ -1,5 +1,5 @@
 import socket
-from main import throw_error
+from main import throw_errors
 port = 4444
 host = '127.0.0.1'
 
